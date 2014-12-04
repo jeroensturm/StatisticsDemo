@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -65,6 +66,11 @@ namespace StatisticsDemo
             }
             return ViewSumList;
         }
+        public StatisticRepository(List<PictureStatistic> listOfPictureStatistics)
+        {
+            PictureStatistics = listOfPictureStatistics;
+        }
 
     }
+
 }

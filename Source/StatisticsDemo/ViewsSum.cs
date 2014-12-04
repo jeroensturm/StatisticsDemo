@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StatisticsDemo
 {
-    class ViewsSum
+    public class ViewsSum
     {
         public int PictureId { get; set; }
         public DateTime StatisticalDate { get; set; }

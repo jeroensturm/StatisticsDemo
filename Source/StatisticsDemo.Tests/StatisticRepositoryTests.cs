@@ -51,7 +51,56 @@ namespace StatisticsDemo.Tests
             var repo = new StatisticRepository();
             // act
             var target = repo.CountByDateAndId();
+            //assert
+            target.Should().NotBeEmpty();
+            //assert
+            foreach(var viewSum in target){
+                viewSum.Should().NotBeNull();
+                viewSum.PictureId.Should().BeGreaterThan(0);
+                viewSum.StatisticalDate.Should().BeBefore(DateTime.Now.Date);
+                viewSum.Views.Should().BeGreaterThan(0);
 
+            }
+
+        }
+        [Test]
+        public void StatisticRepository_Expected_Numbers_Of_Count()
+        {
+            // arrange
+            var items = new List<PictureStatistic>();
+            
+            items.Add(new PictureStatistic{Id = 1 , IpAddress = "", PictureId = 1, StatisticalDate = DateTime.Now.AddDays(-2)});
+            items.Add(new PictureStatistic { Id = 2, IpAddress = "", PictureId = 1, StatisticalDate = DateTime.Now.AddDays(-3) });
+            items.Add(new PictureStatistic { Id = 3, IpAddress = "", PictureId = 1, StatisticalDate = DateTime.Now.AddDays(-4) });
+            items.Add(new PictureStatistic { Id = 4, IpAddress = "", PictureId = 1, StatisticalDate = DateTime.Now.AddDays(-5) });
+            items.Add(new PictureStatistic { Id = 5, IpAddress = "", PictureId = 1, StatisticalDate = DateTime.Now.AddDays(-6) });
+            items.Add(new PictureStatistic { Id = 6, IpAddress = "", PictureId = 2, StatisticalDate = DateTime.Now.AddDays(-2) });
+            items.Add(new PictureStatistic { Id = 7, IpAddress = "", PictureId = 2, StatisticalDate = DateTime.Now.AddDays(-3) });
+            items.Add(new PictureStatistic { Id = 8, IpAddress = "", PictureId = 2, StatisticalDate = DateTime.Now.AddDays(-4) });
+            items.Add(new PictureStatistic { Id = 9, IpAddress = "", PictureId = 2, StatisticalDate = DateTime.Now.AddDays(-5) });
+            items.Add(new PictureStatistic { Id = 10, IpAddress = "", PictureId = 2, StatisticalDate = DateTime.Now.AddDays(-6) });
+            items.Add(new PictureStatistic { Id = 11, IpAddress = "", PictureId = 3, StatisticalDate = DateTime.Now.AddDays(-2) });
+            items.Add(new PictureStatistic { Id = 12, IpAddress = "", PictureId = 3, StatisticalDate = DateTime.Now.AddDays(-3) });
+            items.Add(new PictureStatistic { Id = 13, IpAddress = "", PictureId = 3, StatisticalDate = DateTime.Now.AddDays(-4) });
+            items.Add(new PictureStatistic { Id = 14, IpAddress = "", PictureId = 3, StatisticalDate = DateTime.Now.AddDays(-5) });
+            items.Add(new PictureStatistic { Id = 15, IpAddress = "", PictureId = 3, StatisticalDate = DateTime.Now.AddDays(-6) });
+
+            //arange
+            var repo = new StatisticRepository(items);
+            //act
+            var target = repo.CountByDateAndId();
+            //assert
+            target.Should().NotBeEmpty();
+            //assert
+            target.Count.Should().Equals(1);
+            //assert
+            foreach (var viewSum in target)
+            {
+                viewSum.Should().NotBeNull();
+                viewSum.PictureId.Should().BeGreaterThan(0);
+                viewSum.StatisticalDate.Should().BeBefore(DateTime.Now.Date);
+                viewSum.Views.Should().BeGreaterThan(0);
+            }
         }
     }
 }

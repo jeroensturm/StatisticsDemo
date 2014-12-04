@@ -44,5 +44,13 @@ namespace StatisticsDemo.Tests
                 view.StatisticalDate.Date.Should().Be(expectedDate);
             }
         }
+        [Test]
+        public void StatisticRepository_CountByDateAndId_should_Return_Numbers_Of_Views_Foreach_PictureId()
+        {
+            // arrange
+            var repo = new StatisticRepository();
+            // act
+            repo.CountByDateAndId();
+        }
     }
 }

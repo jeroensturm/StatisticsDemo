@@ -39,8 +39,10 @@ namespace StatisticsDemo
             return PictureStatistics.Where(p => p.StatisticalDate.Date == date.Date);
         }
 
-        public void CountByDateAndId()
+        public List<ViewsSum> CountByDateAndId()
         {
+            var viewcount = new ViewsSum();
+            var ViewSumList = new List<ViewsSum>();
             var viewsGroupedByDateAndPictureId = PictureStatistics
                 .Where(p => p.StatisticalDate.Date < DateTime.Now.Date)
                 // group everything , by the statistical DATE AND PICTUREID
@@ -54,8 +56,14 @@ namespace StatisticsDemo
             //return for each group by
             foreach (var view in viewsGroupedByDateAndPictureId)
             {
-                Console.WriteLine("On {0}, there were {1} views for picture: {2}", view.Date.Date, view.ViewsForThisDay.Count, view.PictureId);
+                //Console.WriteLine("On {0}, there were {1} views for picture: {2}", view.Date.Date, view.ViewsForThisDay.Count, view.PictureId);
+                viewcount.PictureId = view.PictureId;
+                viewcount.StatisticalDate = view.Date.Date;
+                viewcount.Views = view.ViewsForThisDay.Count;
+                ViewSumList.Add(viewcount);
+
             }
+            return ViewSumList;
         }
 
     }

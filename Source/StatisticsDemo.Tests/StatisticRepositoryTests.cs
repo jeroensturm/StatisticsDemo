@@ -50,7 +50,8 @@ namespace StatisticsDemo.Tests
             // arrange
             var repo = new StatisticRepository();
             // act
-            repo.CountByDateAndId();
+            var target = repo.CountByDateAndId();
+
         }
     }
 }

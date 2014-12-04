@@ -51,9 +51,9 @@ namespace StatisticsDemo.Tests
             var repo = new StatisticRepository();
             // act
             var target = repo.CountByDateAndId();
-            //assert
+            //assert - that there is something in
             target.Should().NotBeEmpty();
-            //assert
+            //assert - that all returned values are correct
             foreach(var viewSum in target){
                 viewSum.Should().NotBeNull();
                 viewSum.PictureId.Should().BeGreaterThan(0);
@@ -73,27 +73,29 @@ namespace StatisticsDemo.Tests
             items.Add(new PictureStatistic { Id = 2, IpAddress = "", PictureId = 1, StatisticalDate = DateTime.Now.AddDays(-3) });
             items.Add(new PictureStatistic { Id = 3, IpAddress = "", PictureId = 1, StatisticalDate = DateTime.Now.AddDays(-4) });
             items.Add(new PictureStatistic { Id = 4, IpAddress = "", PictureId = 1, StatisticalDate = DateTime.Now.AddDays(-5) });
-            items.Add(new PictureStatistic { Id = 5, IpAddress = "", PictureId = 1, StatisticalDate = DateTime.Now.AddDays(-6) });
+            items.Add(new PictureStatistic { Id = 5, IpAddress = "", PictureId = 1, StatisticalDate = DateTime.Now.AddDays(-2) });
             items.Add(new PictureStatistic { Id = 6, IpAddress = "", PictureId = 2, StatisticalDate = DateTime.Now.AddDays(-2) });
             items.Add(new PictureStatistic { Id = 7, IpAddress = "", PictureId = 2, StatisticalDate = DateTime.Now.AddDays(-3) });
             items.Add(new PictureStatistic { Id = 8, IpAddress = "", PictureId = 2, StatisticalDate = DateTime.Now.AddDays(-4) });
             items.Add(new PictureStatistic { Id = 9, IpAddress = "", PictureId = 2, StatisticalDate = DateTime.Now.AddDays(-5) });
-            items.Add(new PictureStatistic { Id = 10, IpAddress = "", PictureId = 2, StatisticalDate = DateTime.Now.AddDays(-6) });
+            items.Add(new PictureStatistic { Id = 10, IpAddress = "", PictureId = 2, StatisticalDate = DateTime.Now.AddDays(-2) });
             items.Add(new PictureStatistic { Id = 11, IpAddress = "", PictureId = 3, StatisticalDate = DateTime.Now.AddDays(-2) });
             items.Add(new PictureStatistic { Id = 12, IpAddress = "", PictureId = 3, StatisticalDate = DateTime.Now.AddDays(-3) });
             items.Add(new PictureStatistic { Id = 13, IpAddress = "", PictureId = 3, StatisticalDate = DateTime.Now.AddDays(-4) });
             items.Add(new PictureStatistic { Id = 14, IpAddress = "", PictureId = 3, StatisticalDate = DateTime.Now.AddDays(-5) });
-            items.Add(new PictureStatistic { Id = 15, IpAddress = "", PictureId = 3, StatisticalDate = DateTime.Now.AddDays(-6) });
+            items.Add(new PictureStatistic { Id = 15, IpAddress = "", PictureId = 3, StatisticalDate = DateTime.Now.AddDays(-2) });
 
             //arange
             var repo = new StatisticRepository(items);
+            // arrange
+            var expectedAmount = 12;
             //act
             var target = repo.CountByDateAndId();
-            //assert
+            //assert - that we dont have an empty object
             target.Should().NotBeEmpty();
-            //assert
-            target.Count.Should().Equals(1);
-            //assert
+            //assert - that the returnvalue return the right amount 
+            target.Count.Should().Be(expectedAmount);
+            //assert - that all returned values are correct
             foreach (var viewSum in target)
             {
                 viewSum.Should().NotBeNull();

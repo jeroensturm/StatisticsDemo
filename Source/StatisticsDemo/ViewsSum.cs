@@ -8,6 +8,7 @@ namespace StatisticsDemo
 {
     public class ViewsSum
     {
+        public int Id { get; set; }
         public int PictureId { get; set; }
         public DateTime StatisticalDate { get; set; }
         public int Views { get; set; }

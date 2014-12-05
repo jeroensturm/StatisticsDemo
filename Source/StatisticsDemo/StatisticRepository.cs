@@ -47,7 +47,7 @@ namespace StatisticsDemo
 
         public List<ViewsSum> CountByDateAndId()
         {
-            var viewcount = new ViewsSum();
+            
             var ViewSumList = new List<ViewsSum>();
             var viewsGroupedByDateAndPictureId = PictureStatistics
                 .Where(p => p.StatisticalDate.Date < DateTime.Now.Date)
@@ -62,18 +62,18 @@ namespace StatisticsDemo
             //return for each group by
             foreach (var view in viewsGroupedByDateAndPictureId)
             {
+                var viewcount = new ViewsSum();
                 Console.WriteLine("On {0}, there were {1} views for picture: {2}", view.Date.Date, view.ViewsForThisDay.Count, view.PictureId);
                 viewcount.PictureId = view.PictureId;
                 viewcount.StatisticalDate = view.Date.Date;
                 viewcount.Views = view.ViewsForThisDay.Count;
                 ViewSumList.Add(viewcount);
-
             }
             return ViewSumList;
         }
         public List<DayHits> HitsPerDate()
         {
-            var dayHits = new DayHits();
+           
             var dayHitsList = new List<DayHits>();
             var viewsGroupedByDateAndPictureId = PictureStatistics
                 .Where(p => p.StatisticalDate.Date < DateTime.Now.Date)
@@ -87,6 +87,7 @@ namespace StatisticsDemo
                 });
             foreach (var view in viewsGroupedByDateAndPictureId)
             {
+                var dayHits = new DayHits();
                 Console.WriteLine("On {0}, there were {1} views", view.Date.Date, view.ViewsForThisDay.Count);
                 dayHits.StatisticalDate = view.Date.Date;
                 dayHits.Views = view.ViewsForThisDay.Count;
